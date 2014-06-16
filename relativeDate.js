@@ -31,23 +31,12 @@
           return day_diff === 0 && (diff < 60 && "just now" || diff < 120 && "about 1 minute ago" || diff < 3600 && Math.floor(diff / 60) + " minutes ago" || diff < 7200 && "about 1 hour ago" || diff < 86400 && Math.floor(diff / 3600) + " hours ago") || day_diff === 1 && "Yesterday" || day_diff < 7 && day_diff + " days ago" || day_diff === 7 && "a week ago" || Math.ceil(day_diff / 7) + " weeks ago";
         };
         return {
-          set: function(date, callback, optionalFormat) {
-            var error, iterator, notice, relDate, success;
+          set: function(date, optionalFormat) {
+            var error, iterator, relDate, success;
             relDate = time_ago(date, optionalFormat);
-            iterator = $interval(function() {
-              relDate = time_ago(date, optionalFormat);
-              return callback(relDate);
-            }, 60000);
             success = function() {};
             error = function() {};
-            notice = function() {
-              if (!(relDate.slice(-3) === "now" || relDate.slice(-3) === "ago" || relDate.slice(-3) === "day")) {
-                return $interval.cancel(iterator);
-              }
-            };
-            iterator.then(success, error, notice);
-            callback(relDate);
-            return iterator;
+            return relDate;
           }
         };
       }
