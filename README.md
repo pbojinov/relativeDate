@@ -1,7 +1,7 @@
 angular-relativeDate
 ---
 
-> ```relativeDate``` is an Angular.js service for replacing iso-formated, date-time stamps with auto-updating, relative time labels.
+> ```relativeDate``` is an Angular.js service for replacing iso-formated, date-time stamps with relative time labels.
 
 ## Example
 
