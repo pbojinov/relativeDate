@@ -8,7 +8,7 @@ angular.module('relativeDate',[])
     this.cutoffDayCount = (numDays) ->
       _cutoffDay_ = numDays
 
-    this.$get = [ 'dateFilter', '$interval', (dateFilter, $interval) ->
+    this.$get = [ 'dateFilter', (dateFilter) ->
       fallbackFormat = (formatOverride) ->
         if typeof formatOverride != 'undefined'
           return formatOverride
@@ -34,26 +34,9 @@ angular.module('relativeDate',[])
           Math.ceil( day_diff / 7 ) + " weeks ago"
 
       return {
-        set: (date, callback, optionalFormat) ->
+        set: (date, optionalFormat) ->
           relDate = time_ago(date, optionalFormat)
-
-          iterator = $interval ->
-            relDate = time_ago(date, optionalFormat)
-            callback(relDate)
-          , 60000 # execute callback function every 60 seconds
-
-          success = -> # success callback (not needed here) is called by the $interval promise when all iteration is complete - only possible if the optional 3rd arg (total iterations) was passed into $interval
-            return
-          error = ->   # error callback (not needed here) is called by the $interval promise if iteration is canceled early
-            return
-          notice = ->  # notice callback is called by the $interval promise after each iteration
-            $interval.cancel(iterator) unless !!(relDate[-3..-1] is "now"|| relDate[-3..-1] is "ago"|| relDate[-3..-1] is "day")
-            # kill $interval updates now if not using relative-time labels (older than 3 weeks)
-
-          iterator.then(success, error, notice)
-
-          callback(relDate) # initial call to callback function.
-          return iterator   # return the promise object incase you plan on manualing canceling iteration at somepoint
+          return relDate  
       }
     ]
     return this

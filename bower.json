@@ -2,11 +2,12 @@
   "name": "relativeDate",
   "main": "relativeDate.js",
   "version": "0.9.1",
-  "homepage": "https://github.com/OutlawAndy/relativeDate",
+  "homepage": "https://github.com/pbojinov/relativeDate",
   "authors": [
-    "Andy Cohen <outlawandy@gmail.com>"
+    "Andy Cohen <outlawandy@gmail.com>",
+    "Petar Bojinov <petarbojinov@gmail.com>"
   ],
-  "description": "angular service that provides auto-updating, relative time labels like \"about 1 minute ago\"",
+  "description": "angular service that provides relative time labels like \"about 1 minute ago\"",
   "keywords": [
     "angular",
     "relative",
